@@ -1,0 +1,155 @@
+﻿<Window x:Class="EpiphanyChat.Chatwindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:local="clr-namespace:EpiphanyChat"
+        mc:Ignorable="d"
+        Title="Chatwindow" Height="550" Width="719"
+        WindowStyle="None" 
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown"
+        Background="#EBF2F9"
+        Loaded="Chat_win_loaded"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="719">
+            <materialDesign:ColorZone
+            Mode="PrimaryLight"
+            Padding="16" Height="70">
+                <DockPanel Height="38" VerticalAlignment="Top">
+                    <materialDesign:PopupBox
+                    DockPanel.Dock="Right"
+                    PlacementMode="BottomAndAlignRightEdges">
+                        <ListBox Name="Frlist_box">
+                        </ListBox>
+                    </materialDesign:PopupBox>
+                    <StackPanel
+                    Orientation="Horizontal" Width="581">
+                        <TextBlock
+                    VerticalAlignment="Center"
+                    materialDesign:ColorZoneAssist.Mode="Light"
+                    FontSize="22"
+                    Name="friend_name"
+                    Width="496"
+                    Margin="30 0 0 0" FontFamily="Segoe Print"/>
+                        <Button  Height="38"  Name="Addfriend_btn" Click="Add_member_btn" Margin="0 0 0 0" Visibility="Visible" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="38">
+                            <materialDesign:PackIcon Kind="Add" />
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+
+            </materialDesign:ColorZone>
+            <Grid HorizontalAlignment="Left" Height="230" Margin="0,320,0,0" VerticalAlignment="Top" Width="719" Background="AliceBlue">
+
+                <TextBox
+                Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                Margin="10,54,10,0"
+                Name="send_msg_block"
+                VerticalAlignment="Top"
+                Height="166"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                VerticalScrollBarVisibility="Auto"
+                Background="Azure"
+                materialDesign:HintAssist.Hint="内容框"
+                FontSize="16"
+                IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" FontFamily="Global User Interface" />
+                <Button
+                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                Width="100"
+                Margin="266,174,353,24"
+                Content="关闭"
+                Click="exit_btn_click"
+                >
+
+                </Button>
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100"
+                    Margin="587,174,32,24"
+                    Content="发送(S)"
+                    Click="Send_btn_click"
+                    IsDefault="True"
+                />
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}" Margin="114,17,549,181" Click="Sendfile_btn_click" Background="Transparent">
+                    <materialDesign:PackIcon Kind="FolderOutline"  Height="32" Width="33"  Margin="-10,-5"/>
+                </Button>
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}" Margin="34,17,629,181" Background="Transparent" Click="Picture_send_click">
+                    <materialDesign:PackIcon Kind="EmoticonHappyOutline"  Height="32" Width="33"  Margin="-10,-5"/>
+                </Button>
+                <Button Content="清除记录" Name="clearhis_btn" FontSize="16" Style="{StaticResource MaterialDesignFlatButton}"  HorizontalAlignment="Left" Margin="568,10,0,0" VerticalAlignment="Top" Width="119" Click="Clearhis_btn_click" Height="39"/>
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" Visibility="Hidden" Name="progress" IsIndeterminate="True" HorizontalAlignment="Left" Height="39" Margin="328,10,0,0" VerticalAlignment="Top" Width="38"/>
+                <ComboBox HorizontalAlignment="Left" Margin="269,18,0,0" VerticalAlignment="Top" Width="59" Name="sizeoftex" SelectionChanged="changesize" >
+                    <ComboBoxItem
+                    Content="12" />
+                    <ComboBoxItem
+                    Content="14" />
+                    <ComboBoxItem
+                    Content="18" />
+                    <ComboBoxItem
+                    Content="16" 
+                    IsSelected="True"/>
+                </ComboBox>
+                <Label Content="字体大小" HorizontalAlignment="Left" Margin="194,16,0,0" VerticalAlignment="Top" FontSize="15" FontFamily="STSong"/>
+                <Button
+                    Name="udp_send_btn"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Width="100"
+                    Margin="431,174,188,24"
+                    Content="UDP发送"
+                    Click="Sendudp_btn_click"
+                    IsDefault="True"
+                />
+                <Label Content="成员学号" Name="member_id" Visibility="Hidden" HorizontalAlignment="Left" Margin="371,14,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="1.238,-0.38"/>
+                <TextBox HorizontalAlignment="Left" Name="id_input"  Visibility="Hidden" Height="32" Margin="466,16,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="14" Width="120"/>
+
+
+            </Grid>
+            <ListBox Height="250" Margin="5,70,5,0" VerticalAlignment="Top" Width="709"
+                      Name="Messagehistory" HorizontalContentAlignment="Stretch" Focusable="False" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:Name="MessagesItem" DataType="{x:Type local:iMessage}" >
+                        <StackPanel x:Name="onceMsg" HorizontalAlignment ="{Binding Orient}" Orientation="Vertical" >
+                            <StackPanel x:Name="TitilMsg"  Orientation="Horizontal" >
+                                <TextBlock x:Name="idTextMessage" Text="{Binding SrcID}" 
+                                       VerticalAlignment="Center" Padding="8"
+                                       TextWrapping="Wrap" MaxWidth="350"
+                                       Visibility="Visible" FontSize="12" />
+                                <TextBlock x:Name="space" Text= "  " 
+                                       VerticalAlignment="Center" Padding="8"
+                                       TextWrapping="Wrap" MaxWidth="350"
+                                       Visibility="Visible" FontSize="12" />
+                                <TextBlock x:Name="timeTextMessage" Text="{Binding Time}" 
+                                       VerticalAlignment="Center" Padding="8"
+                                       TextWrapping="Wrap" MaxWidth="350"
+                                       Visibility="Visible" FontSize="12" />
+                            </StackPanel>
+                            <materialDesign:Card
+                            Background="{DynamicResource PrimaryHueLightBrush}"
+                            Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                            MaxWidth="360" MinWidth="50"
+                            MaxHeight="300" MinHeight="30"
+                            HorizontalAlignment="{Binding Orient}"
+                            Padding="8">
+                                <StackPanel x:Name="onceIma" HorizontalAlignment ="{Binding Orient}" Orientation="Vertical" >
+                                    <TextBlock x:Name="tbTextMessage" Text="{Binding iText}" 
+                                       VerticalAlignment="Center" Padding="8"
+                                       TextWrapping="Wrap" MaxWidth="350" MinHeight="0" Height="{Binding height}"
+                                       Visibility="Visible" FontSize="14" />
+                                    <Image x:Name="tbimagemessage"  HorizontalAlignment="Left" Stretch="Uniform"  MaxHeight="200" MaxWidth="100" Source="{Binding FileMsg}"
+                                            VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+    </Grid>
+</Window>
+    

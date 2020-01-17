@@ -1,0 +1,86 @@
+﻿<Window x:Class="EpiphanyChat.FriendListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EpiphanyChat"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        gif:ImageBehavior.AnimateInDesignMode="True"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"	
+        Title="Epiphany" 
+        Height="660" 
+        Width="350" 
+        WindowStyle="None" 
+        AllowsTransparency="True"
+        Background="AliceBlue"
+        WindowStartupLocation="CenterScreen">
+    <Grid HorizontalAlignment="Left" Height="660" VerticalAlignment="Top" Width="350">
+        <materialDesign:ColorZone
+        Mode="PrimaryLight"
+        Padding="16">
+            <StackPanel
+            Orientation="Horizontal">
+                <TextBlock
+                VerticalAlignment="Center"
+                    Text="Chat"
+                    materialDesign:ColorZoneAssist.Mode="Light"
+                    FontSize="22"
+            Margin="120 -10 0 0" FontFamily="Segoe Print"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <Button
+        Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+        materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="282,598,28,22" Content="退出" Name="Quit_btn" Click="Quit_btn_Click">
+        </Button>
+        <Button
+        Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+        materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="113,598,197,22" Content="查找" Name="Search_btn" Click="Search_btn_Click" RenderTransformOrigin="-0.2,0.5">
+        </Button>
+        <Button
+        Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+        materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="197,598,113,22" Content="备注"  Click="rename_btn_Click" RenderTransformOrigin="-0.2,0.5">
+        </Button>
+        <Button
+        Style="{DynamicResource MaterialDesignFloatingActionMiniButton}"
+        materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="24,598,286,22" Content="聊天" Name="Chat_btn" Click="Chat_btn_Click" >
+        </Button>
+
+        <Button
+        Style="{StaticResource MaterialDesignFlatButton}"
+        Margin="210,561,0,67" Content="删除好友" Name="Delete_btn" Click="Delete_friend_btn">
+        </Button>
+
+        <Button
+        Style="{StaticResource MaterialDesignFlatButton}"
+        Margin="24,561,186,67" Content="新建群聊" Name="New_group_btn" Click="Create_group_btn">
+        </Button>
+
+        <Grid HorizontalAlignment="Left" Height="496" Margin="0,47,0,0" VerticalAlignment="Top" Width="350" Background="WhiteSmoke">
+            <TreeView HorizontalAlignment="Left" Height="439" VerticalAlignment="Top" Width="350" x:Name="ListGroup_tree" Margin="0,57,0,0" Visibility="Hidden">
+                <TreeViewItem Header="我的群组"  Name="MyGroup" Selected="Select_group" IsExpanded="True"  >
+                </TreeViewItem>
+            </TreeView>
+            <StackPanel HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Width="350" >
+
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}" Click="group_now_cli" Margin="200,0,36,-48" Height="49" Background="Transparent" >
+                    <materialDesign:PackIcon Kind="AccountMultiple" Height="41" Width="80"  MouseDown="Group_list_show" />
+                </Button>
+
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}" Click="friend_now_cli" Margin="34,0,194,0" Height="50" Background="Transparent" >
+                    <materialDesign:PackIcon Kind="UserSettings" Height="40" Width="83" MouseDown="Friend_list_show" RenderTransformOrigin="0.497,0.062" />
+                </Button>
+            </StackPanel>
+            <TreeView HorizontalAlignment="Left" Height="439" VerticalAlignment="Top" Width="350" x:Name="ListFriend_tree" Margin="0,57,0,0"  >
+                <TreeViewItem Header="我的好友"  Name="Myfriend" Selected="Select_friend" IsExpanded="True"  >
+
+                </TreeViewItem>
+            </TreeView>
+        </Grid>
+
+    </Grid>
+
+</Window>

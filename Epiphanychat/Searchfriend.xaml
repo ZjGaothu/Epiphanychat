@@ -1,0 +1,74 @@
+﻿<Window x:Class="EpiphanyChat.Searchfriend"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:local="clr-namespace:EpiphanyChat"
+        mc:Ignorable="d"
+        WindowStyle="None" 
+        AllowsTransparency="True"
+        Title="查找好友" Height="300" Width="500"
+         Background="#EBF2F9">
+    <Grid>
+        <materialDesign:PackIcon Kind="AccountPlus"  Margin="118,126,0,0" RenderTransformOrigin="-0.375,0.083" />
+        <TextBox Name ="Friend_ID" TextChanged="input_change" HorizontalAlignment="Left" Height="65" Margin="157,77,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="180" materialDesign:HintAssist.Hint="好友学号" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        <Button
+        Style="{StaticResource MaterialDesignIconButton}"
+        IsDefault="True"
+        Margin="354,108,98,144" Click="Search_btn_click">
+        <materialDesign:PackIcon
+        Kind="Play"
+            />
+        </Button>
+        <materialDesign:ColorZone
+        Mode="PrimaryLight"
+        Padding="16">
+            <StackPanel
+            Orientation="Horizontal">
+                <TextBlock
+                VerticalAlignment="Center"
+                    Text="查找好友"
+                    materialDesign:ColorZoneAssist.Mode="Light"
+            Margin="16 0 0 0">
+                </TextBlock>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <Button
+        Style="{StaticResource MaterialDesignRaisedButton}"
+        Width="100"
+        Margin="52,236,348,32" Name="Add_btn" RenderTransformOrigin="0.5,1.281" Click="Add_btn_click">
+        添加好友
+        </Button>
+        <Button
+        Style="{StaticResource MaterialDesignRaisedButton}"
+        Width="100"
+        Margin="206,236,194,32" RenderTransformOrigin="0.5,1.281" Click="Begin_chat_btn_click">
+        发起聊天
+        </Button>
+        <Button
+        Style="{StaticResource MaterialDesignRaisedButton}"
+        Width="100"
+        Margin="354,236,46,32" Name="Cancel_btn" Click="Cancel_btn_click">
+            取消
+        </Button>
+        <TextBlock
+        Style="{StaticResource MaterialDesignTitleTextBlock}"
+        Margin="123,165,219,103"
+        Text="好友状态："
+        Visibility="Hidden" 
+        Name ="Text_condi1">
+        </TextBlock>
+        <TextBlock
+        Style="{StaticResource MaterialDesignTitleTextBlock}"
+        Margin="243,165,28,103"
+        Visibility="Hidden"
+        Name ="Text_condi2">
+        </TextBlock>
+        <TextBlock
+        Style="{StaticResource MaterialDesignTitleTextBlock}"
+        Margin="122,197,28,71"
+        Name ="Text_condi3">
+        </TextBlock>
+    </Grid>
+</Window>
